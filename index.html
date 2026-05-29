@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ultimate Oyun Motorları Rehberi</title>
+  <style>
+    :root {
+      --bg: #0b1120;
+      --card: #111827;
+      --soft: #1e293b;
+      --text: #e5e7eb;
+      --muted: #94a3b8;
+      --accent: #38bdf8;
+      --green: #4ade80;
+      --red: #f87171;
+      --yellow: #facc15;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Inter, Arial, sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    header {
+      padding: 80px 20px;
+      text-align: center;
+      background: linear-gradient(135deg, #020617, #0f172a, #111827);
+      border-bottom: 1px solid #334155;
+    }
+
+    header h1 {
+      font-size: 3.5rem;
+      color: var(--accent);
+      margin-bottom: 25px;
+    }
+
+    header p {
+      max-width: 1100px;
+      margin: auto;
+      color: var(--muted);
+      font-size: 1.15rem;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      background: rgba(2,6,23,.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid #1e293b;
+      padding: 14px;
+    }
+
+    nav ul {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      list-style: none;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      padding: 10px 15px;
+      border-radius: 12px;
+      background: #1d4ed8;
+      transition: .3s;
+      font-size: .92rem;
+    }
+
+    nav a:hover {
+      background: var(--accent);
+      color: black;
+    }
+
+    .container {
+      width: min(1500px, 95%);
+      margin: auto;
+      padding: 40px 0;
+    }
+
+    section {
+      margin-bottom: 90px;
+    }
+
+    h2 {
+      font-size: 2.4rem;
+      margin-bottom: 25px;
+      color: var(--accent);
+    }
+
+    .lead {
+      color: var(--muted);
+      margin-bottom: 25px;
+      max-width: 1100px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 22px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid #334155;
+      border-radius: 24px;
+      padding: 24px;
+      transition: .3s;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      border-color: var(--accent);
+    }
+
+    .card h3 {
+      color: var(--accent);
+      margin-bottom: 14px;
+      font-size: 1.5rem;
+    }
+
+    .tag {
+      display: inline-block;
+      background: #1d4ed8;
+      padding: 6px 12px;
+      border-radius: 999px;
+      margin-bottom: 16px;
+      font-size: .82rem;
+    }
+
+    ul {
+      margin-left: 20px;
+      margin-top: 12px;
+    }
+
+    li {
+      margin-bottom: 7px;
+    }
+
+    .difficulty {
+      margin: 12px 0;
+      color: var(--yellow);
+      font-weight: bold;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      border-radius: 18px;
+      margin-top: 25px;
+    }
+
+    th, td {
+      border: 1px solid #334155;
+      padding: 15px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: #1d4ed8;
+    }
+
+    tr:nth-child(even) {
+      background: #0f172a;
+    }
+
+    .good {
+      color: var(--green);
+      font-weight: bold;
+    }
+
+    .bad {
+      color: var(--red);
+      font-weight: bold;
+    }
+
+    .hero-box {
+      background: linear-gradient(135deg, #111827, #0f172a);
+      border: 1px solid #334155;
+      padding: 30px;
+      border-radius: 24px;
+    }
+
+    footer {
+      padding: 40px;
+      text-align: center;
+      border-top: 1px solid #334155;
+      color: var(--muted);
+      background: #020617;
+    }
+
+    .roadmap-step {
+      margin-bottom: 20px;
+      padding: 20px;
+      background: #111827;
+      border-left: 5px solid var(--accent);
+      border-radius: 12px;
+    }
+
+    @media(max-width:768px){
+      header h1 {
+        font-size: 2.2rem;
+      }
+
+      h2 {
+        font-size: 1.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Ultimate Oyun Motorları Rehberi</h1>
+  <p>
+    Bu sayfa; Unity, Unreal Engine, Godot ve piyasadaki diğer önemli oyun motorlarının tamamını araştırıp karşılaştırmalı şekilde öğrenebilmen için hazırlandı.
+    Eğitim rehberi + teknik karşılaştırma + kariyer rehberi + sistem rehberi mantığında tasarlanmıştır.
+  </p>
+</header>
+
+<nav>
+  <ul>
+    <li><a href="#temel">Temel Bilgiler</a></li>
+    <li><a href="#motorler">Motorlar</a></li>
+    <li><a href="#karsi">Karşılaştırma</a></li>
+    <li><a href="#diller">Diller</a></li>
+    <li><a href="#dosya">Dosyalar</a></li>
+    <li><a href="#platform">Platformlar</a></li>
+    <li><a href="#sistem">Sistem</a></li>
+    <li><a href="#kariyer">Kariyer</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+  </ul>
+</nav>
+
+<div class="container">
+
+<section id="temel">
+  <h2>Oyun Motoru Nedir?</h2>
+
+  <div class="hero-box">
+    <p>
+      Oyun motoru; oyunların grafiklerini, fizik sistemlerini, seslerini, yapay zekasını,
+      animasyonlarını ve oyuncu etkileşimlerini yönetmek için kullanılan geliştirme altyapısıdır.
+    </p>
+
+    <br>
+
+    <p>
+      Basit anlatımla:
+    </p>
+
+    <ul>
+      <li><strong>Unity</strong> = Her alanda güçlü genel amaçlı motor</li>
+      <li><strong>Unreal</strong> = AAA grafik canavarı</li>
+      <li><strong>Godot</strong> = Hafif ve ücretsiz indie motoru</li>
+      <li><strong>GameMaker</strong> = 2D hız motoru</li>
+      <li><strong>Construct</strong> = Kod bilmeden oyun geliştirme</li>
+      <li><strong>CryEngine</strong> = Grafik odaklı ileri seviye sistem</li>
+      <li><strong>Bevy</strong> = Modern Rust tabanlı geleceğin motoru</li>
+    </ul>
+  </div>
+</section>
+
+<section id="motorler">
+  <h2>Detaylı Oyun Motorları Kütüphanesi</h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <div class="tag">En Popüler</div>
+      <h3>Unity</h3>
+      <p>Mobil, PC, VR, WebGL ve 3D dahil her alanda kullanılabilen en yaygın motorlardan biri.</p>
+      <div class="difficulty">Zorluk: 7/10</div>
+      <ul>
+        <li>Dil: C#</li>
+        <li>2D ve 3D güçlü</li>
+        <li>Asset Store çok büyük</li>
+        <li>Mobil oyun piyasasında çok güçlü</li>
+        <li>Başlangıç + profesyonel için uygun</li>
+        <li>Yaş: 12+</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="tag">AAA Grafik</div>
+      <h3>Unreal Engine</h3>
+      <p>Sinema kalitesinde grafikler ve açık dünya oyunları için kullanılan profesyonel motor.</p>
+      <div class="difficulty">Zorluk: 9.5/10</div>
+      <ul>
+        <li>Dil: C++</li>
+        <li>Blueprint sistemi var</li>
+        <li>Nanite ve Lumen teknolojileri</li>
+        <li>Film sektöründe de kullanılıyor</li>
+        <li>Çok güçlü sistem ister</li>
+        <li>Yaş: 15+</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="tag">Açık Kaynak</div>
+      <h3>Godot</h3>
+      <p>Hafif, açık kaynak ve tamamen ücretsiz modern oyun motoru.</p>
+      <div class="difficulty">Zorluk: 4/10</div>
+      <ul>
+        <li>Dil: GDScript, C#</li>
+        <li>Düşük sistemlerde çalışır</li>
+        <li>2D sistemi çok güçlü</li>
+        <li>Hızlı öğrenilir</li>
+        <li>Indie geliştiricilerin favorisi</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="tag">2D Uzmanı</div>
+      <h3>GameMaker</h3>
+      <p>Pixel art ve platform tarzı 2D oyunlarda aşırı hızlı geliştirme sağlar.</p>
+      <div class="difficulty">Zorluk: 3/10</div>
+      <ul>
+        <li>Dil: GML</li>
+        <li>2D odaklı</li>
+        <li>Yeni başlayan dostu</li>
+        <li>3D zayıf</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="tag">No-Code</div>
+      <h3>Construct 3</h3>
+      <p>Kod yazmadan event sistemi ile oyun geliştirme sağlar.</p>
+      <div class="difficulty">Zorluk: 1/10</div>
+      <ul>
+        <li>Sürükle bırak sistem</li>
+        <li>Çocuklar için uygun</li>
+        <li>2D odaklı</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="tag">Mobil</div>
+      <h3>Defold</h3>
+      <p>Hafif ve optimize çalışan mobil odaklı oyun motoru.</p>
+      <div class="difficulty">Zorluk: 4/10</div>
+      <ul>
+        <li>Dil: Lua</li>
+        <li>Mobil optimizasyon güçlü</li>
+        <li>Düşük boyutlu oyunlar</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="tag">Grafik Canavarı</div>
+      <h3>CryEngine</h3>
+      <p>Çok gerçekçi grafikler için kullanılan ağır ama güçlü motor.</p>
+      <div class="difficulty">Zorluk: 10/10</div>
+      <ul>
+        <li>Dil: C++</li>
+        <li>Çok güçlü sistem ister</li>
+        <li>İleri seviye kullanıcılar için</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="tag">Açık Kaynak AAA</div>
+      <h3>O3DE</h3>
+      <p>Amazon destekli modern açık kaynak motor.</p>
+      <div class="difficulty">Zorluk: 10/10</div>
+      <ul>
+        <li>Dil: C++</li>
+        <li>AAA projeler</li>
+        <li>Teknik ekipler için</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="tag">Modern</div>
+      <h3>Flax Engine</h3>
+      <p>Unity benzeri modern yapıda hafif oyun motoru.</p>
+      <div class="difficulty">Zorluk: 6/10</div>
+      <ul>
+        <li>Dil: C#</li>
+        <li>Modern render sistemi</li>
+        <li>Yeni nesil alternatif</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="tag">Rust</div>
+      <h3>Bevy</h3>
+      <p>Rust dilini kullanan performans odaklı modern ECS motoru.</p>
+      <div class="difficulty">Zorluk: 8/10</div>
+      <ul>
+        <li>Dil: Rust</li>
+        <li>Çok performanslı</li>
+        <li>Motor mantığı öğretir</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="tag">Visual Novel</div>
+      <h3>Ren'Py</h3>
+      <p>Visual novel ve hikaye oyunları için çok popüler sistem.</p>
+      <div class="difficulty">Zorluk: 2/10</div>
+      <ul>
+        <li>Dil: Python</li>
+        <li>Hikaye oyunları</li>
+        <li>Anime tarzı projeler</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="tag">RPG</div>
+      <h3>RPG Maker</h3>
+      <p>JRPG tarzı oyunları hızlı yapmak için geliştirilmiş sistem.</p>
+      <div class="difficulty">Zorluk: 2/10</div>
+      <ul>
+        <li>Dil: JavaScript</li>
+        <li>Hazır savaş sistemleri</li>
+        <li>Harita editörü mevcut</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="tag">Framework</div>
+      <h3>MonoGame</h3>
+      <p>Motor değil framework mantığında çalışan gelişmiş yapı.</p>
+      <div class="difficulty">Zorluk: 8/10</div>
+      <ul>
+        <li>Dil: C#</li>
+        <li>Motor mantığını öğretir</li>
+        <li>Hazır editör az</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="tag">Web</div>
+      <h3>Phaser</h3>
+      <p>Tarayıcı tabanlı HTML5 oyun geliştirme frameworkü.</p>
+      <div class="difficulty">Zorluk: 5/10</div>
+      <ul>
+        <li>Dil: JavaScript</li>
+        <li>Web oyunları</li>
+        <li>Mobil tarayıcı desteği</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="tag">3D Web</div>
+      <h3>Babylon.js</h3>
+      <p>WebGL tabanlı gelişmiş 3D web motoru.</p>
+      <div class="difficulty">Zorluk: 7/10</div>
+      <ul>
+        <li>Dil: TypeScript</li>
+        <li>Tarayıcı 3D</li>
+        <li>Metaverse projeleri</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<section id="karsi">
+  <h2>Dev Teknik Karşılaştırma</h2>
+
+  <table>
+    <tr>
+      <th>Motor</th>
+      <th>Kolaylık</th>
+      <th>Grafik</th>
+      <th>2D</th>
+      <th>3D</th>
+      <th>Performans</th>
+      <th>Topluluk</th>
+      <th>Ücret</th>
+    </tr>
+
+    <tr>
+      <td>Unity</td>
+      <td>Orta</td>
+      <td class="good">Çok Güçlü</td>
+      <td>Çok İyi</td>
+      <td>Çok İyi</td>
+      <td>İyi</td>
+      <td class="good">Devasa</td>
+      <td>Ücretsiz + Pro</td>
+    </tr>
+
+    <tr>
+      <td>Unreal</td>
+      <td class="bad">Zor</td>
+      <td class="good">En Güçlü</td>
+      <td>Orta</td>
+      <td>Mükemmel</td>
+      <td>Çok İyi</td>
+      <td>Çok Büyük</td>
+      <td>Gelir bazlı</td>
+    </tr>
+
+    <tr>
+      <td>Godot</td>
+      <td class="good">Kolay</td>
+      <td>İyi</td>
+      <td class="good">Mükemmel</td>
+      <td>İyi</td>
+      <td>İyi</td>
+      <td>Büyük</td>
+      <td>Tam ücretsiz</td>
+    </tr>
+
+    <tr>
+      <td>GameMaker</td>
+      <td>Kolay</td>
+      <td>Orta</td>
+      <td>Çok Güçlü</td>
+      <td>Zayıf</td>
+      <td>İyi</td>
+      <td>İyi</td>
+      <td>Kısmen ücretli</td>
+    </tr>
+
+    <tr>
+      <td>Construct</td>
+      <td class="good">Çok Kolay</td>
+      <td>Zayıf</td>
+      <td>İyi</td>
+      <td>Zayıf</td>
+      <td>Orta</td>
+      <td>Orta</td>
+      <td>Abonelik</td>
+    </tr>
+
+  </table>
+</section>
+
+<section id="diller">
+  <h2>Kullanılan Programlama Dilleri</h2>
+
+  <table>
+    <tr>
+      <th>Dil</th>
+      <th>Kullanıldığı Motorlar</th>
+      <th>Zorluk</th>
+      <th>Performans</th>
+    </tr>
+
+    <tr>
+      <td>C#</td>
+      <td>Unity, Flax, Stride</td>
+      <td>Orta</td>
+      <td>Yüksek</td>
+    </tr>
+
+    <tr>
+      <td>C++</td>
+      <td>Unreal, CryEngine, O3DE</td>
+      <td>Zor</td>
+      <td>Maksimum</td>
+    </tr>
+
+    <tr>
+      <td>Python</td>
+      <td>Ren'Py, Panda3D</td>
+      <td>Kolay</td>
+      <td>Orta</td>
+    </tr>
+
+    <tr>
+      <td>Lua</td>
+      <td>Defold</td>
+      <td>Kolay</td>
+      <td>İyi</td>
+    </tr>
+
+    <tr>
+      <td>Rust</td>
+      <td>Bevy</td>
+      <td>Zor</td>
+      <td>Çok Yüksek</td>
+    </tr>
+
+  </table>
+</section>
+
+<section id="dosya">
+  <h2>Desteklenen Dosya Formatları</h2>
+
+  <div class="grid">
+    <div class="card">
+      <h3>3D Model Dosyaları</h3>
+      <ul>
+        <li>FBX</li>
+        <li>OBJ</li>
+        <li>GLTF</li>
+        <li>BLEND</li>
+        <li>DAE</li>
+        <li>USD</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>2D Grafik Dosyaları</h3>
+      <ul>
+        <li>PNG</li>
+        <li>JPG</li>
+        <li>PSD</li>
+        <li>SVG</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>Ses Dosyaları</h3>
+      <ul>
+        <li>MP3</li>
+        <li>WAV</li>
+        <li>OGG</li>
+        <li>FLAC</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="platform">
+  <h2>Desteklenen Platformlar</h2>
+
+  <table>
+    <tr>
+      <th>Motor</th>
+      <th>Windows</th>
+      <th>Mac</th>
+      <th>Linux</th>
+      <th>Android</th>
+      <th>iOS</th>
+      <th>Web</th>
+      <th>Konsol</th>
+    </tr>
+
+    <tr>
+      <td>Unity</td>
+      <td>Evet</td>
+      <td>Evet</td>
+      <td>Evet</td>
+      <td>Evet</td>
+      <td>Evet</td>
+      <td>Evet</td>
+      <td>Evet</td>
+    </tr>
+
+    <tr>
+      <td>Unreal</td>
+      <td>Evet</td>
+      <td>Evet</td>
+      <td>Evet</td>
+      <td>Evet</td>
+      <td>Evet</td>
+      <td>Sınırlı</td>
+      <td>Evet</td>
+    </tr>
+
+    <tr>
+      <td>Godot</td>
+      <td>Evet</td>
+      <td>Evet</td>
+      <td>Evet</td>
+      <td>Evet</td>
+      <td>Evet</td>
+      <td>Evet</td>
+      <td>Sınırlı</td>
+    </tr>
+
+  </table>
+</section>
+
+<section id="sistem">
+  <h2>Sistem Gereksinimleri</h2>
+
+  <table>
+    <tr>
+      <th>Motor</th>
+      <th>Minimum RAM</th>
+      <th>Önerilen RAM</th>
+      <th>GPU</th>
+    </tr>
+
+    <tr>
+      <td>Godot</td>
+      <td>4 GB</td>
+      <td>8 GB</td>
+      <td>Dahili GPU yeterli olabilir</td>
+    </tr>
+
+    <tr>
+      <td>Unity</td>
+      <td>8 GB</td>
+      <td>16 GB</td>
+      <td>GTX 1050+</td>
+    </tr>
+
+    <tr>
+      <td>Unreal Engine</td>
+      <td>16 GB</td>
+      <td>32 GB</td>
+      <td>RTX 2060+</td>
+    </tr>
+
+    <tr>
+      <td>CryEngine</td>
+      <td>16 GB</td>
+      <td>32 GB</td>
+      <td>RTX 3070+</td>
+    </tr>
+
+  </table>
+</section>
+
+<section id="kariyer">
+  <h2>Kariyer İçin En İyi Seçimler</h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <h3>Mobil Kariyer</h3>
+      <ul>
+        <li>Unity</li>
+        <li>Defold</li>
+        <li>Cocos Creator</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>AAA Kariyer</h3>
+      <ul>
+        <li>Unreal Engine</li>
+        <li>CryEngine</li>
+        <li>O3DE</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>Indie Geliştirici</h3>
+      <ul>
+        <li>Godot</li>
+        <li>GameMaker</li>
+        <li>Unity</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>Motor Mimarisi Öğrenmek</h3>
+      <ul>
+        <li>Raylib</li>
+        <li>MonoGame</li>
+        <li>Bevy</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<section id="roadmap">
+  <h2>Ultimate Öğrenme Roadmap</h2>
+
+  <div class="roadmap-step">
+    <h3>1. Başlangıç</h3>
+    <p>Construct 3 veya Godot ile temel oyun mantığını öğren.</p>
+  </div>
+
+  <div class="roadmap-step">
+    <h3>2. Programlama</h3>
+    <p>C# öğren ve Unity projeleri geliştir.</p>
+  </div>
+
+  <div class="roadmap-step">
+    <h3>3. 3D ve Shader</h3>
+    <p>3D modelleme, ışıklandırma ve shader sistemlerini öğren.</p>
+  </div>
+
+  <div class="roadmap-step">
+    <h3>4. AAA Seviye</h3>
+    <p>Unreal Engine ile büyük ölçekli projelere geç.</p>
+  </div>
+
+  <div class="roadmap-step">
+    <h3>5. Motor Mantığı</h3>
+    <p>Raylib, MonoGame veya Bevy ile motor mimarisini öğren.</p>
+  </div>
+
+</section>
+
+<section>
+  <h2>En Mantıklı Genel Tavsiye</h2>
+
+  <div class="hero-box">
+    <p>
+      Eğer düşük sistemin varsa ve hızlı öğrenmek istiyorsan → <strong>Godot</strong><br><br>
+      Eğer profesyonel kariyer hedefliyorsan → <strong>Unity + Unreal</strong><br><br>
+      Eğer ultra grafik istiyorsan → <strong>Unreal Engine</strong><br><br>
+      Eğer kod bilmiyorsan → <strong>Construct 3</strong><br><br>
+      Eğer pixel art yapıyorsan → <strong>GameMaker</strong><br><br>
+      Eğer motor mantığını öğrenmek istiyorsan → <strong>Bevy + Raylib</strong>
+    </p>
+  </div>
+</section>
+
+</div>
+
+<footer>
+  <p>
+    Ultimate Oyun Motorları Rehberi — Eğitim, Karşılaştırma ve Kariyer Kılavuzu
+  </p>
+</footer>
+
+</body>
+  </html>
+  
